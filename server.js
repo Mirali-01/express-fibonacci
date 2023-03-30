@@ -69,15 +69,41 @@ app.get("/", (req, res) => {
 });
 
 // Number of Tanks left
-app.get("/:tanks", (req, res) => {
-  tanks = req.params.tanks;
-  tanks > 0
-    ? res.send(
-        `<a href=/${tanks - 1} >` +
-          `take one down, pass it around ${tanks} tanks, running down bottles.` +
-          "</a>"
-      )
-    : res.send("<a href=/>" + "Start Over" + "</a>");
+// app.get("/:tanks", (req, res) => {
+//   tanks = req.params.tanks;
+//   tanks > 0
+//     ? res.send(
+//         `<a href=/${tanks - 1} >` +
+//           `take one down, pass it around ${tanks} tanks, running down bottles.` +
+//           "</a>"
+//       )
+//     : res.send("<a href=/>" + "Start Over" + "</a>");
+// });
+
+app.get("/fibonacci/:num", (req, res) => {
+  const isFibonacci = (num) => {
+    if (num <= 3 || num === 0) {
+      return true;
+    }
+    let prev = 1;
+    let count = 2;
+    let temp = 0;
+    while (count <= num) {
+      if (prev + count === num) {
+        return true;
+      }
+      temp = prev;
+      prev = count;
+      count += temp;
+    }
+    return false;
+  };
+
+  res.send(
+    isFibonacci(parseInt(req.params.num)) === true //multiply a str * 1 --> num or parseInt
+      ? `Very good. ${parseInt(req.params.num)} is a Fibonacci number.`
+      : "I can tell this is not a Fibonacci number."
+  );
 });
 
 // Listening port
