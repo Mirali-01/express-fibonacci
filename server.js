@@ -50,23 +50,23 @@ app.get("/magic", (req, res) => {
       req.query.question +
       "</h1>" +
       "<h2>" +
-      magic8[Math.floor(Math.random() * 20) + 1] +
+      magic8[Math.floor(Math.random() * 20)] +
       "</h2>"
   );
 });
 
 // Tank Homepage
-app.get("/", (req, res) => {
-  let tanks = 99;
-  res.send(
-    "<h1>" +
-      `${tanks} tanks running down bottles!` +
-      "</h1>" +
-      `<a href=/98>` +
-      "take one down, pass it around" +
-      "</a>"
-  );
-});
+// app.get("/", (req, res) => {
+//   let tanks = 99;
+//   res.send(
+//     "<h1>" +
+//       `${tanks} tanks running down bottles!` +
+//       "</h1>" +
+//       `<a href=/98>` +
+//       "take one down, pass it around" +
+//       "</a>"
+//   );
+// });
 
 // Number of Tanks left
 // app.get("/:tanks", (req, res) => {
@@ -85,16 +85,18 @@ app.get("/fibonacci/:num", (req, res) => {
     if (num <= 3 || num === 0) {
       return true;
     }
-    let prev = 1;
-    let count = 2;
-    let temp = 0;
+    let prev = 1; //1 --> 2
+    let count = 2; //2 --> 3
+    let temp = 0; //0 --> 1
     while (count <= num) {
+      //2 <= 5, 3 <= 5
       if (prev + count === num) {
-        return true;
+        //3 !== 5, 2 + 3 === 5
+        return true; // isFibonacci
       }
-      temp = prev;
-      prev = count;
-      count += temp;
+      temp = prev; //1 --> 0 = 1
+      prev = count; //2 --> 1 = 2
+      count += temp; //2+1 = 3
     }
     return false;
   };
